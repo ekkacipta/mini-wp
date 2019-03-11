@@ -1,0 +1,124 @@
+*,ul{
+    padding: 0;
+    margin: 0;
+}
+
+.item ul, .col-2 .item{
+    list-style: none
+}
+
+.navbar{
+    background-color: darkcyan;
+    justify-content: space-between;
+    display: flex;
+    height: 1.3cm;
+    align-content: center;
+}
+
+
+
+.help{
+    /* justify-content: flex-end; */
+    align-items: center;
+    display: flex;
+}
+
+.item{
+    color: aliceblue;
+    /* padding: 4px; */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.item a{
+    color: aliceblue;
+}
+
+.logo {
+    font-weight: bold
+}
+
+.item #write{
+    display: -webkit-box;
+    display: flex
+}
+
+.main{
+    display: flex
+}
+
+
+.item #samping{
+    color: rgb(43, 45, 48);
+}
+
+.row{
+    background-color: whitesmoke;
+}
+
+.col-2{
+    background-color: antiquewhite;
+    height: 100vh;
+}
+
+/* .col-8 ul{ */
+    /* justify-content: center;¡ */
+    /* display: flex; */
+/* } */
+
+.item li{
+    margin-left: 10px;
+    padding: 2px;
+    margin-top: 4px;
+}
+
+
+li{
+    color: rgb(43, 45, 48);
+}
+
+.col-2 ul{
+    color:gray;
+}
+
+.col-10{
+    width: 100px;
+    height: 100px;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center
+    
+}
+
+.bebas{
+    margin-top: 40px;
+    width: 70%;
+    height: 60%;
+    background-color: white;
+    padding: 17px;
+    border: solid 1px rgb(194, 185, 185);
+    position: relative;
+}
+
+.bebas span{
+    margin: 10px;
+}
+
+.col-2 li{
+    font-size: 16px;
+}
+
+#text , #pub{
+    color: black;
+}
+
+#search{
+    color: black;
+    position: absolute;
+    right: 3%
+}
