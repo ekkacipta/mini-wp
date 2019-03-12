@@ -26,6 +26,15 @@ Vue.component('body-row', {
                 <span><a href="" id="text">Drafts <i class="far fa-circle"></i></a></span>
                 <span><a href="" id="search"><i class="fas fa-search"></i></a></span>
             </div>
+            <div>
+                <form method="post" @submit.prevent="addArticles" >
+                    <input v-model="title" type="text" name="title" placeholder="Title">
+                    <br>
+                    <input v-model="content" type="text" name="content" placeholder="Content">
+                    <br>
+                    <button type="submit">Add Content</button>
+                </form>
+            </div>
         </div>
     </div>
     `

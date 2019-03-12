@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mini-Wp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <eka-nav></eka-nav>
+        <div class="isi">
+            <div class="row">
+                <div class="col-2">
+                    <ul class="item">
+                        <li><a href="#" id="samping"><i class="fas fa-desktop"> </i></a> View Site</li>
+                        <li><a href="#" id="samping"><i class="far fa-chart-bar"> </i></a> Stats</li>
+                        <li><a href="#" id="samping"><i class="fas fa-undo-alt"></i></a> Activity</li>
+                        <li><a href="#" id="samping"><i class="fas fa-globe-asia"></i></a> Plan</li>
+                    </ul>
+                    <ul class="item">
+                        Manage
+                        <br>
+                        <li><a href="#" id="samping"><i class="fas fa-file-alt"> </i></a> Site Pages</li>
+                        <li><a href="#" id="samping"><i class="fas fa-align-left"> </i></a> Blog Posts</li>
+                        <li><a href="#" id="samping"><i class="fas fa-image"> </i></a> Media</li>
+                        <li><a href="#" id="samping"><i class="fas fa-comments"> </i></a> Comments</li>
+                        <li><a href="#" id="samping"><i class="fas fa-shapes"> </i></a> Feedback</li>
+                        <li><a href="#" id="samping"><i class="fas fa-plug"> </i></a> Plugins</li>
+                        <li><a href="#" id="samping"><i class="fas fa-cloud-upload-alt"> </i></a> Import</li>
+                    </ul>
+                </div>
+                <div class="col-10" id="coba">
+                    <div class="bebas">
+                        <span><a href="#" id="pub" @click="onClickList">Published <i class="far fa-circle"></i></a></span>
+                        <span><a href="#" id="text" @click="onClickAdd">Add Content <i class="far fa-circle"></i></a></span>
+                        <span><a href="#" id="search"><i class="fas fa-search"></i></a></span>
+                    </div>
+                    <br><br>
+                    <div v-if="seenAdd" id="add-content">
+                        <form @submit.prevent="addArticles" >
+                            <input class="form-control" v-model="title" type="text" name="title" placeholder="Title">
+                            <br>
+                            <textarea class="form-control" v-model="content" type="text" name="content" placeholder="Content"></textarea>
+                            <br>
+                            <button style="float:right" class="btn btn-info" type="submit">Submit</button>
+                        </form>
+                    </div>
+                    <div v-if="seenUpdate" id="update-content">
+                        <form @submit.prevent="updated" >
+                            <input class="form-control" v-model="title_update" type="text" name="title" placeholder="Title">
+                            <br>
+                            <textarea class="form-control" v-model="content_update" type="text" name="content" placeholder="Content"></textarea>
+                            <br>
+                            <button style="float:right" class="btn btn-info" type="submit" >Submit</button>
+                        </form>
+                    </div>
+                    <br><br>
+                    <template v-if="seenList">
+                        <div v-for="(article, index) in articles" class="main-article">
+                            <p>Ini Title : {{ article.title }}</p>
+                            <p>Contentnya nihh : <br> {{ article.content }}</p>
+                            <br>
+                            <div style="float:right"><a href="#" @click="update(article._id)" class="col-sm-3"><i class="fas fa-pencil-alt"></i></a><a href="#" @click="onClickDelete(index, article._id)" ><i class="fas fa-trash-alt"></i></a></div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="components/add-content.js"></script>
+    <script src="components/row.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
+
