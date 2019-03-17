@@ -1,6 +1,8 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const article = require('./routes/article.js')
+const user = require('./routes/user')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
@@ -13,7 +15,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/article', article)
-
+app.use('/users', user)
 
 app.listen(3000, function() {
     console.log('Listen Port 3000')

@@ -6,7 +6,9 @@ class Controller{
         let data = {
             title: req.body.title,
             content: req.body.content,
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString(),
+            url: req.file.cloudStoragePublicUrl,
+            userId: req.body.userId
         }
         Article
             .create(data)

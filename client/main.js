@@ -1,8 +1,12 @@
 let url = 'http://localhost:3000'
 
+
 var app = new Vue({
     el: '#app',
     data:{
+        name: '',
+        email: '',
+        password: '',
         title: '',
         content: '',
         createdAt: '',
@@ -10,9 +14,13 @@ var app = new Vue({
         title_update: '',
         content_update: '',
         articles: [],
+        user: [],
         seenAdd: false,
         seenList: false,
-        seenUpdate: false
+        seenUpdate: false,
+        isLogin: true,
+        isLogout: false,
+        location: 'login'
     },
     created (){
         this.allData()
@@ -28,6 +36,7 @@ var app = new Vue({
             axios
                 .post(`${url}/article`, data)
                 .then(({ data }) => {
+                    swal('Successfully Post', '', "success")
                     this.articles.push(data)
                     this.title = ''
                     this.content = ''
@@ -37,6 +46,11 @@ var app = new Vue({
                     console.log(err)
                 })
         },
+
+        onClickRegister(){
+            this.location = 'register'
+        },
+
         onClickList(){
             if(this.seenList === false){
                this.seenList = true 
@@ -67,15 +81,33 @@ var app = new Vue({
             }
         },
         onClickDelete(index, id){
-            axios
-                .delete(`${url}/article/${id}`)
-                .then((data) => {
-                    this.articles.splice(index, 1)
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this post",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axios
+                        .delete(`${url}/article/${id}`)
+                        .then((data) => {
+                            this.articles.splice(index, 1)
+                            swal("Poof! Your post has been deleted!", {
+                                icon: "success",
+                            });
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                    
+                } else {
+                    swal("Delete cancel");
+                }
+          });
         },
+
         allData(){
             axios
                 .get(`${url}/article`)
@@ -107,12 +139,62 @@ var app = new Vue({
             axios
                 .put(`${url}/article/${this.id_update}`, { title: this.title_update, content: this.content_update})
                 .then(({ data }) => {
+                    swal('Successfully Update', '', "success")
                     this.onClickList()
                 })
                 .catch((err) => {
-
+                    console.log(err)
                 })
 
+        },
+
+        login(data) {
+            this.email = data.email
+            this.password = data.password
+
+            axios
+                .post(`${url}/users/login`, {
+                    email: this.email,
+                    password: this.password
+                })
+                .then(({ data }) => {
+                    console.log(data)
+                    swal(`Login Succesfull`, '', "success")
+                    this.isLogin = false
+                    this.isLogout = true
+                    localStorage.setItem('token', data)
+                })
+                .catch((err) => {
+                    swal(`Wrong Username/Password`, '', "error")
+                })
+        },
+
+        register(data) {
+            this.name = data.name
+            this.email = data.email
+            this.password = data.password
+
+            axios
+                .post(`${url}/users/register`, {
+                    name: this.name,
+                    email: this.email,
+                    password: this.password
+                })
+                .then(({ data }) => {
+                    this.location = 'login'
+                })
+                .catch((err) => {
+                    console.log(err)
+                    swal('ERROR', 'Password must contain uppercase letter and number' + '\n' + 'OR' + '\n' +'Email already registred', "info")
+                })
+        },
+
+        logout(){
+            swal(`Logout Sucessfull`, '', "success")
+            this.location = 'login'
+            this.isLogin = true
+            this.isLogout = false
+            localStorage.clear()
         }
     }
 });
